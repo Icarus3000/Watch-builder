@@ -24,10 +24,10 @@ jobs:
           cp my-design/watchface.xml samples/WatchFaceFormat/app/src/main/res/raw/watchface.xml
 
       - name: Build APK
-        working-directory: samples/WatchFaceFormat
+        working-directory: samples
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleDebug
+          ./gradlew -p WatchFaceFormat assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
