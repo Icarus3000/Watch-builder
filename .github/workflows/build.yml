@@ -19,7 +19,9 @@ jobs:
           path: samples
 
       - name: Inject Custom XML
-        run: cp my-design/watchface.xml samples/WatchFaceFormat/app/src/main/res/raw/watchface.xml
+        run: |
+          mkdir -p samples/WatchFaceFormat/app/src/main/res/raw
+          cp my-design/watchface.xml samples/WatchFaceFormat/app/src/main/res/raw/watchface.xml
 
       - name: Build APK
         working-directory: samples/WatchFaceFormat
@@ -32,3 +34,4 @@ jobs:
         with:
           name: watchface-apk
           path: samples/WatchFaceFormat/app/build/outputs/apk/debug/*.apk
+          
