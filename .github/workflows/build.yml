@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - 'watchface.xml'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,20 +21,25 @@ jobs:
           repository: android/wear-os-samples
           path: samples
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Inject Custom XML
         run: |
-          mkdir -p samples/WatchFaceFormat/app/src/main/res/raw
-          cp my-design/watchface.xml samples/WatchFaceFormat/app/src/main/res/raw/watchface.xml
+          mkdir -p samples/WatchFaceFormat/SimpleAnalog/watchface/src/main/res/raw
+          cp my-design/watchface.xml samples/WatchFaceFormat/SimpleAnalog/watchface/src/main/res/raw/watchface.xml
 
       - name: Build APK
-        working-directory: samples
+        working-directory: samples/WatchFaceFormat/SimpleAnalog
         run: |
           chmod +x ./gradlew
-          ./gradlew -p WatchFaceFormat assembleDebug
+          ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: watchface-apk
-          path: samples/WatchFaceFormat/app/build/outputs/apk/debug/*.apk
-          
+          path: samples/WatchFaceFormat/SimpleAnalog/watchface/build/outputs/apk/debug/*.apk

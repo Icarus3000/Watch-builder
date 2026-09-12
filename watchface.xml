@@ -1,64 +1,103 @@
 <WatchFace width="450" height="450">
-    <!-- Clean White Background -->
     <Scene backgroundColor="#FFFFFF">
-        
-        <!-- Minimalist Dial Index Markers -->
+        <!-- Dial / Hour Markers -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <!-- 12 O'Clock -->
+            <!-- Major hour markers (12, 3, 6, 9) -->
+            <!-- 12 o'clock -->
             <Line startX="225" startY="20" endX="225" endY="50">
-                <Stroke color="#111111" thickness="8" cap="ROUND"/>
+                <Stroke color="#111111" thickness="7" cap="ROUND" />
             </Line>
-            <!-- 3 O'Clock -->
+            <!-- 3 o'clock -->
             <Line startX="430" startY="225" endX="400" endY="225">
-                <Stroke color="#111111" thickness="8" cap="ROUND"/>
+                <Stroke color="#111111" thickness="7" cap="ROUND" />
             </Line>
-            <!-- 6 O'Clock -->
+            <!-- 6 o'clock -->
             <Line startX="225" startY="430" endX="225" endY="400">
-                <Stroke color="#111111" thickness="8" cap="ROUND"/>
+                <Stroke color="#111111" thickness="7" cap="ROUND" />
             </Line>
-            <!-- 9 O'Clock -->
+            <!-- 9 o'clock -->
             <Line startX="20" startY="225" endX="50" endY="225">
-                <Stroke color="#111111" thickness="8" cap="ROUND"/>
+                <Stroke color="#111111" thickness="7" cap="ROUND" />
+            </Line>
+
+            <!-- Minor hour markers -->
+            <!-- 1 o'clock -->
+            <Line startX="328" startY="47" endX="319" endY="62">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 2 o'clock -->
+            <Line startX="403" startY="122" endX="388" endY="131">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 4 o'clock -->
+            <Line startX="403" startY="327" endX="388" endY="319">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 5 o'clock -->
+            <Line startX="328" startY="403" endX="319" endY="388">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 7 o'clock -->
+            <Line startX="122" startY="403" endX="131" endY="388">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 8 o'clock -->
+            <Line startX="47" startY="328" endX="62" endY="319">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 10 o'clock -->
+            <Line startX="47" startY="122" endX="62" endY="131">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
+            </Line>
+            <!-- 11 o'clock -->
+            <Line startX="122" startY="47" endX="131" endY="62">
+                <Stroke color="#555555" thickness="4" cap="ROUND" />
             </Line>
         </PartDraw>
-        
-        <!-- Hour Hand (Rotates 30 degrees per hour + 0.5 degrees per minute) -->
+
+        <!-- Hour Hand -->
         <Group x="0" y="0" width="450" height="450" pivotX="225" pivotY="225">
             <Transform target="angle" value="([HOUR_0_11] * 30) + ([MINUTE] * 0.5)" />
             <PartDraw x="0" y="0" width="450" height="450">
-                <Line startX="225" startY="225" endX="225" endY="110">
-                    <Stroke color="#000000" thickness="12" cap="ROUND"/>
+                <!-- Balanced hour hand with 15px counter-tail -->
+                <Line startX="225" startY="240" endX="225" endY="115">
+                    <Stroke color="#111111" thickness="10" cap="ROUND" />
                 </Line>
             </PartDraw>
         </Group>
-        
-        <!-- Minute Hand (Rotates 6 degrees per minute + 0.1 degrees per second) -->
+
+        <!-- Minute Hand -->
         <Group x="0" y="0" width="450" height="450" pivotX="225" pivotY="225">
             <Transform target="angle" value="([MINUTE] * 6) + ([SECOND] * 0.1)" />
             <PartDraw x="0" y="0" width="450" height="450">
-                <Line startX="225" startY="225" endX="225" endY="60">
-                    <Stroke color="#333333" thickness="8" cap="ROUND"/>
+                <!-- Balanced minute hand with 15px counter-tail -->
+                <Line startX="225" startY="240" endX="225" endY="60">
+                    <Stroke color="#222222" thickness="7" cap="ROUND" />
                 </Line>
             </PartDraw>
         </Group>
-        
-        <!-- Sweeping Second Hand (Oyster Perpetual continuous movement) -->
+
+        <!-- Sweeping Second Hand -->
         <Group x="0" y="0" width="450" height="450" pivotX="225" pivotY="225">
-            <!-- Binding rotation to milliseconds forces a seamless 60fps sweep -->
             <Transform target="angle" value="([SECOND] * 6) + ([MILLISECOND] * 0.006)" />
             <PartDraw x="0" y="0" width="450" height="450">
-                <Line startX="225" startY="260" endX="225" endY="50">
-                    <Stroke color="#D40000" thickness="4" cap="ROUND"/>
+                <!-- Sweeping second hand with 40px counterweight tail -->
+                <Line startX="225" startY="265" endX="225" endY="45">
+                    <Stroke color="#E53935" thickness="3.5" cap="ROUND" />
                 </Line>
             </PartDraw>
         </Group>
-        
-        <!-- Center Pin Overlay -->
+
+        <!-- Center Pin / Hub Cap -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <Ellipse x="215" y="215" width="20" height="20">
-                <Fill color="#D40000"/>
+            <!-- Outer red hub (16x16) centered at (225, 225) -->
+            <Ellipse x="217" y="217" width="16" height="16">
+                <Fill color="#E53935" />
+            </Ellipse>
+            <!-- Inner dark center pin (6x6) centered at (225, 225) -->
+            <Ellipse x="222" y="222" width="6" height="6">
+                <Fill color="#111111" />
             </Ellipse>
         </PartDraw>
-        
     </Scene>
 </WatchFace>
